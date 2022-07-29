@@ -2,10 +2,6 @@ import numpy as np
 from flask import Flask, request, jsonify, render_template
 import pickle
 
-import sys
- 
-# adding Folder_2 to the system path
-sys.path.insert(0, 'c:\users\user\appdata\local\programs\python\python39\lib\site-packages (1.19.5)')
 
 app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb'))

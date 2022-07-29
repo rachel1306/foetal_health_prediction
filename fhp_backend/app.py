@@ -2,6 +2,7 @@ import numpy as np
 from flask import Flask, request, jsonify, render_template
 import pickle
 
+
 app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb'))
 
@@ -17,13 +18,28 @@ def predict():
     int_features = [int(x) for x in request.form.values()]
     final_features = [np.array(int_features)]
     prediction = model.predict(final_features)
+    #if prediction == 0:
+     #   prediction_text='The health of the foetus appears normal!'
+    #elif prediction == 1:
+     #   prediction_text='There appears to be slight discrepencies regarding the health of the foetus. Contact your health provider for further clarifications.'
+    #else:  
+     #   prediction_text='The model predicted an abnormal value. Please contact your health provider immediately.'
+    #return render_template('index.html', prediction_text)
     if prediction == 0:
-        prediction_text='The health of the foetus appears normal!'
+        return {
+            'number':'0',
+            'description':'The health of the foetus appears normal!'
+        }
     elif prediction == 1:
-        prediction_text='There appears to be slight discrepencies regarding the health of the foetus. Contact your health provider for further clarifications.'
+        return{
+            'number':'1',
+            'description': 'There appears to be slight discrepencies regarding the health of the foetus. Contact your health provider for further clarifications.'
+        }
     else:  
-        prediction_text='The model predicted an abnormal value. Please contact your health provider immediately.'
-    return render_template('index.html', prediction_text)
+        return{
+            'number':'2',
+            'description':'The model predicted an abnormal value. Please contact your health provider immediately.'
+        }
 
 
 @app.route('/predict_api',methods=['POST'])

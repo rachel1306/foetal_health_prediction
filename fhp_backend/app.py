@@ -26,20 +26,20 @@ def predict():
      #   prediction_text='The model predicted an abnormal value. Please contact your health provider immediately.'
     #return render_template('index.html', prediction_text)
     if prediction == 0:
-        return {
+        return jsonify({
             'number':'0',
             'description':'The health of the foetus appears normal!'
-        }
+        })
     elif prediction == 1:
-        return{
+        return jsonify({
             'number':'1',
             'description': 'There appears to be slight discrepencies regarding the health of the foetus. Contact your health provider for further clarifications.'
-        }
+        })
     else:  
-        return{
+        return jsonify({
             'number':'2',
             'description':'The model predicted an abnormal value. Please contact your health provider immediately.'
-        }
+        })
 
 
 @app.route('/predict_api',methods=['POST'])

@@ -1,10 +1,10 @@
 import numpy as np
 from flask import Flask, request, jsonify, render_template
-import pickle
+import keras
 
 
 app = Flask(__name__)
-model = pickle.load(open('model.pkl', 'rb'))
+model = keras.models.load_model('./model.h5')
 
 @app.route('/')
 def home():

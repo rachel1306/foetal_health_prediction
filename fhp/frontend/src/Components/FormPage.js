@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import "./FormPage.css";
 
 const FormPage = () => {
@@ -14,22 +15,32 @@ const FormPage = () => {
     const [meanValueOfShortTermVariability, setMeanValueOfShortTermVariability] = useState("");
     const [percentageOfTimeWithAbnormalLongTermVariability, setPercentageOfTimeWithAbnormalLongTermVariability] = useState("");
 
-    const onSubmitHandler = (event) => {
+    const onSubmitHandler = async (event) => {
         event.preventDefault();
+        const newValues = {
+            baseline,
+            accelerations,
+            fetalMovements,
+            uterineContractions,
+            lightDecelerations,
+            severeDecelerations,
+            prolongedDecelerations,
+            abnormalShortTermVariability,
+            meanValueOfShortTermVariability,
+            percentageOfTimeWithAbnormalLongTermVariability,
+        };
+        const data = {
+            "data": { ...newValues }
+        };
+        console.table(data);
+        try {
+            const res = await axios.post("https://localhost:3000");
+        } catch (e) {
+            console.log(e);
+        }
     };
 
-    const newValues = {
-        baseline,
-        accelerations,
-        fetalMovements,
-        uterineContractions,
-        lightDecelerations,
-        severeDecelerations,
-        prolongedDecelerations,
-        abnormalShortTermVariability,
-        meanValueOfShortTermVariability,
-        percentageOfTimeWithAbnormalLongTermVariability,
-    };
+
 
     return (
         <div className="FormPage">

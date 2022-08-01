@@ -3,11 +3,11 @@ import "./App.css";
 import FormPage from "./Components/FormPage.js";
 
 function App() {
-  
+  const [data, setdata] = useState([{
+    id:"",value:"",
+  }]);
 
-  const addValuesHandler= enteredValue =>{
-    setData
-  };
+  const addValuesHandler= enteredValue =>{};
 
 // Using useEffect for single rendering
   useEffect(() => {

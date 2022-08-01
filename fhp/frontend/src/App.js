@@ -3,10 +3,11 @@ import "./App.css";
 import FormPage from "./Components/FormPage.js";
 
 function App() {
-  const [data, setdata] = useState({
-    number: 0,
-    description: "",
-  });
+  
+
+  const addValuesHandler= enteredValue =>{
+    setData
+  };
 
 // Using useEffect for single rendering
   useEffect(() => {
@@ -24,7 +25,7 @@ function App() {
 }, []);
   return (
     <div className="App">
-      <FormPage />
+      <FormPage onAddValues={addValuesHandler}/>
     </div>
   );
 }

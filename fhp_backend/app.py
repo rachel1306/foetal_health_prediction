@@ -4,7 +4,7 @@ import keras
 
 
 app = Flask(__name__)
-model = keras.models.load_model('./model_new.h5')
+model = keras.models.load_model('./neural_network.h5')
 
 @app.route('/')
 def home():
@@ -18,17 +18,15 @@ def predict():
     float_features = [float(x) for x in request.form.values()]
     final_features = [np.array(float_features).reshape(1,-1)]
     pred = model.predict(final_features)
-    pred = pred[0,:]
     pred = pred.astype(int)
-    prediction = np.bincount(pred).argmax()
-    if prediction == 0:
+    if pred[:,0] == 1:
         prediction_text='The health of the foetus appears normal!'
-    elif prediction == 1:
+    elif pred[:,1] == 1:
         prediction_text='There appears to be slight discrepencies regarding the health of the foetus. Contact your health provider for further clarifications.'
-    elif prediction == 2:  
+    elif pred[:,2] == 1:  
        prediction_text='The model predicted an abnormal value. Please contact your health provider immediately.'
     else :
-        prediction_text='Lemon'
+        prediction_text='Error'
     return render_template('index.html',prediction_text = prediction_text)
     #if prediction == 0:
     #    return {
